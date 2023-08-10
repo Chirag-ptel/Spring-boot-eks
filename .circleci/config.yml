@@ -33,7 +33,7 @@ jobs:
           command: |
             # docker build -t $FULL_IMAGE_NAME .
             docker build -t sample-springboot-eks-image:latest .
-           docker tag sample-springboot-eks-image:latest 205477628494.dkr.ecr.ap-south-1.amazonaws.com/springboot-ghactions-repo:latest
+            docker tag sample-springboot-eks-image:latest 205477628494.dkr.ecr.ap-south-1.amazonaws.com/springboot-ghactions-repo:latest
       - run:
           name: Push image
           command: |
