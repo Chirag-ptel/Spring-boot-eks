@@ -16,6 +16,8 @@ jobs:
           command: |
             echo 'export ECR_REPOSITORY_NAME="${AWS_RESOURCE_NAME_PREFIX}"' >> $BASH_ENV
             echo 'export FULL_IMAGE_NAME="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}:latest"' >> $BASH_ENV
+            # COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+            # IMAGE_TAG=${COMMIT_HASH:=latest}
       - run:
           name: Install dependencies for project
           command: gradle assemble
@@ -29,12 +31,16 @@ jobs:
       - run:
           name: Build image
           command: |
-            docker build -t $FULL_IMAGE_NAME .
+            # docker build -t $FULL_IMAGE_NAME .
+            docker build -t sample-springboot-eks-image:latest .
+           docker tag sample-springboot-eks-image:latest 205477628494.dkr.ecr.ap-south-1.amazonaws.com/springboot-ghactions-repo:latest
       - run:
           name: Push image
           command: |
-            eval $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-            docker push $FULL_IMAGE_NAME
+            # eval $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+            docker login -u AWS -p $(aws ecr get-login-password --region ap-south-1) 205477628494.dkr.ecr.ap-south-1.amazonaws.com
+            docker push 205477628494.dkr.ecr.ap-south-1.amazonaws.com/springboot-ghactions-repo:latest
+            # docker push $FULL_IMAGE_NAME
 workflows:
   build-deploy-qa:
     jobs:
