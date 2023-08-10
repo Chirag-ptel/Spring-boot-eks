@@ -38,7 +38,7 @@ jobs:
       - run:
           name: Push image
           command: |
-            eval $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+            eval $(aws ecr get-login --region ap-south-1 --no-include-email)
             # docker login -u AWS -p $(aws ecr get-login-password --region ap-south-1) 205477628494.dkr.ecr.ap-south-1.amazonaws.com
             docker push 205477628494.dkr.ecr.ap-south-1.amazonaws.com/springboot-ghactions-repo:latest
             # docker push $FULL_IMAGE_NAME
