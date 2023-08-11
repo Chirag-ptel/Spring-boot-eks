@@ -19,9 +19,9 @@ jobs:
             echo 'export FULL_IMAGE_NAME="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}:latest"' >> $BASH_ENV
             # COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
             # IMAGE_TAG=${COMMIT_HASH:=latest}
-      - run:
-          name: Install dependencies for project
-          command: gradle assemble
+      # - run:
+      #     name: Install dependencies for project
+      #     command: gradle assemble
       - run:
           name: Install dependencies for AWS
           command: |
