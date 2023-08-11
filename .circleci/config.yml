@@ -14,6 +14,8 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      - aws-cli/setup:
+          profile-name: chirag
       - run:
           name: Setup common environment variables
           command: |
@@ -24,13 +26,13 @@ jobs:
       # - run:
       #     name: Install dependencies for project
       #     command: gradle assemble
-      - run:
-          name: Install dependencies for AWS
-          command: |
-            sudo apt-get update
-            sudo apt-get -y -qq install awscli
-            sudo apt-get install python3-pip
-            sudo pip3 install --upgrade awscli
+      # - run:
+      #     name: Install dependencies for AWS
+      #     command: |
+      #       sudo apt-get update
+      #       sudo apt-get -y -qq install awscli
+      #       sudo apt-get install python3-pip
+      #       sudo pip3 install --upgrade awscli
       - run:
           name: Build image
           command: |
