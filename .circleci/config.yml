@@ -49,6 +49,7 @@ parameters:
     default: true
     type: boolean
 workflows:
+  version: 2.1
   build-deploy-qa:
   build:
     when: << pipeline.parameters.run_workflow_build >>
